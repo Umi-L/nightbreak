@@ -9,7 +9,7 @@ export function TiledDebug(){
             //height and width are always defined on a tilelayer.
             for (let y = 0; y < map.layers[i].height!; y++){
                 for (let x = 0; x < map.layers[i].width!; x++){
-                    DRAW()
+                    //DRAW()
                 }
             }
         }

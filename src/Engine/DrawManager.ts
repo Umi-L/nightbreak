@@ -1,5 +1,5 @@
 import { Entity, entities } from "../Entities/Entity";
-import { DEBUGDrawColliders } from "../libraries/physics";
+import { DEBUGDrawColliders } from "../libraries/Physics";
 
 export interface drawCall {
     layer: number;

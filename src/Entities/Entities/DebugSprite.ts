@@ -6,7 +6,7 @@ import { SpriteRender } from "../../Components/Components/SpriteRenderer";
 import { Transform } from "../../Components/Components/Transform";
 import { AABBFromSprite } from "../../libraries/ImageTools";
 import { Input } from "../../libraries/Input";
-import { AABB } from "../../libraries/physics";
+import { AABB } from "../../libraries/Physics";
 import { Vector2 } from "../../types";
 import { Entity } from "../Entity";
 import { Utils } from "../../libraries/Utils";

@@ -1,5 +1,5 @@
 import { Component } from "../Component";
-import {Actor, AABB, Solid} from "../../libraries/physics"
+import {Actor, AABB, Solid} from "../../libraries/Physics"
 import { Vector2 } from "../../types";
 import { Transform } from "./Transform";
 
