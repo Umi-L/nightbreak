@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+      "lib": ["es2017", "dom"],
+      "strict": true,
+      "outDir": "build",
+      "rootDir": "src",
+      "types": [
+          "love-typescript-definitions",
+          "lua-types/jit"
+      ],
+      "resolveJsonModule": true
+  },
+  "tstl": {
+      "luaTarget": "JIT"
+  }
+}

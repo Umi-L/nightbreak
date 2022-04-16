@@ -1,0 +1,16 @@
+{
+    "Lua.runtime.version": "LuaJIT",
+    "Lua.workspace.library": [
+        "${3rd}/love2d/library"
+    ],
+    "Lua.workspace.checkThirdParty": false,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/node_modules": true
+    }
+}
