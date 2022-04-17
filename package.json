@@ -13,6 +13,7 @@
     "love-typescript-definitions": "^0.24.1"
   },
   "devDependencies": {
+    "cartographer-types": "^0.1.5",
     "lua-types": "^2.11.0",
     "typescript-to-lua": "^1.4.3"
   }

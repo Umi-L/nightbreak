@@ -2,7 +2,7 @@
 
 import { Vector2 } from "../types";
 
-let colliders: AABB[] = [];
+let boundingBoxes: AABB[] = [];
 let actors: Actor[] = [];
 let solids: Solid[] = []
 
@@ -27,7 +27,7 @@ export class AABB{
 
 
         if (exists){
-            colliders.push(this);
+            boundingBoxes.push(this);
 
             console.log("A collider was added")
         }
@@ -51,7 +51,7 @@ export class AABB{
     }
 
     Destroy() {
-        delete colliders[colliders.indexOf(this)]
+        delete boundingBoxes[boundingBoxes.indexOf(this)]
     }
 }
 
@@ -67,9 +67,9 @@ export class Actor{
     collideAt(position:Vector2): boolean {
         let tempCollider: AABB = new AABB(position, this.collider.width, this.collider.height, false);
         
-        for (let i = 0; i < colliders.length; i++){
-            if (this.collider !== colliders[i] || colliders[i] === tempCollider){
-                if (AABB.IsColliding(tempCollider, colliders[i])){
+        for (let i = 0; i < boundingBoxes.length; i++){
+            if (this.collider !== boundingBoxes[i] || boundingBoxes[i] === tempCollider){
+                if (AABB.IsColliding(tempCollider, boundingBoxes[i])){
                     //cleaning up tempCollider
                     tempCollider.Destroy();
                     return true;
@@ -144,8 +144,8 @@ export class Solid{
 }
 
 export function DEBUGDrawColliders(): void {
-    for(let i = 0; i < colliders.length; i++){
-        let collider = colliders[i];
+    for(let i = 0; i < boundingBoxes.length; i++){
+        let collider = boundingBoxes[i];
         love.graphics.rectangle("line", collider.position.x - collider.width/2, collider.position.y - collider.height/2, collider.width, collider.height);
 
         love.graphics.circle("line", collider.p1.x,collider.p1.y, 10)

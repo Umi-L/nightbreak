@@ -1,4 +1,4 @@
-import { Body, Fixture, newWorld, Shape, World } from "love.physics";
+import { Body, Fixture, newWorld, PolygonShape, Shape, World } from "love.physics";
 import { Vector2 } from "../types";
 
 export interface ICollider{
@@ -29,7 +29,40 @@ class Collider{
     }
 
     public Destroy() {
-        delete colliders[colliders.indexOf(this)]
+        const index = colliders.indexOf(this, 0);
+        if (index > -1) {
+            colliders.splice(index, 1);
+        }
     }
 }
 
+class RectCollider extends Collider{
+
+    width: number;
+    height: number;
+    position: Vector2;
+
+    constructor(world:World, width:number, height:number, position:Vector2){
+        let body = love.physics.newBody(world, position.x, position.y);
+        let shape = love.physics.newRectangleShape(width, height);
+        let fixture = love.physics.newFixture(body, shape);
+
+        super(body, shape, fixture);
+
+        this.width = width;
+        this.height = height;
+        this.position = position;
+    }
+}
+let world = createWorld(new Vector2(0,1));
+new RectCollider(world, 100, 100, new Vector2(100,100));
+
+export function DEBUG_DRAW_COLLIDERS(){
+    for (let i = 0; i < colliders.length; i++){
+        if (colliders[i]){
+            let args = (<PolygonShape>colliders[i].shape).getPoints()
+
+            love.graphics.polygon("line", colliders[i].body.getWorldPoints(...args))
+        }
+    }
+}

@@ -6,7 +6,7 @@
       "rootDir": "src",
       "types": [
           "love-typescript-definitions",
-          "lua-types/jit"
+          "lua-types/jit",
       ],
       "resolveJsonModule": true
   },

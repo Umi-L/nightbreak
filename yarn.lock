@@ -2,87 +2,99 @@
 # yarn lockfile v1
 
 
-"enhanced-resolve@^5.8.2":
-  "integrity" "sha512-Bq9VSor+kjvW3f9/MiiR4eE3XYgOl7/rS8lnSxbRbF3kS0B2r+Y9w5krBWxZgDxASVZbdYrn5wT4j/Wb0J9qow=="
-  "resolved" "https://registry.npmjs.org/enhanced-resolve/-/enhanced-resolve-5.9.3.tgz"
-  "version" "5.9.3"
+cartographer-types@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/cartographer-types/-/cartographer-types-0.1.5.tgz#4b21670c5ac0e30e1214a5dd880baf0796e11ef3"
+  integrity sha512-r5knL/FEfISYSNnyuZxAby4i9f+syj4lVFq/Kj0uX4jQkbS8/F6jxvcheu7GcEsLmAVKxN15ON4lc4phcngpHg==
   dependencies:
-    "graceful-fs" "^4.2.4"
-    "tapable" "^2.2.0"
+    lua-types "^2.11.0"
+    tiled-lua-types Nyaacinth/tiled-lua-types
+    typescript-to-lua "^1.0.1"
 
-"function-bind@^1.1.1":
-  "integrity" "sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A=="
-  "resolved" "https://registry.npmjs.org/function-bind/-/function-bind-1.1.1.tgz"
-  "version" "1.1.1"
+cartographer@tesselode/cartographer:
+  version "0.0.0"
+  resolved "https://codeload.github.com/tesselode/cartographer/tar.gz/9e9cd0f36444284bdc270317374685284e67bee2"
 
-"graceful-fs@^4.2.4":
-  "integrity" "sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA=="
-  "resolved" "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.2.10.tgz"
-  "version" "4.2.10"
-
-"has@^1.0.3":
-  "integrity" "sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw=="
-  "resolved" "https://registry.npmjs.org/has/-/has-1.0.3.tgz"
-  "version" "1.0.3"
+enhanced-resolve@^5.8.2:
+  version "5.9.3"
+  resolved "https://registry.npmjs.org/enhanced-resolve/-/enhanced-resolve-5.9.3.tgz"
+  integrity sha512-Bq9VSor+kjvW3f9/MiiR4eE3XYgOl7/rS8lnSxbRbF3kS0B2r+Y9w5krBWxZgDxASVZbdYrn5wT4j/Wb0J9qow==
   dependencies:
-    "function-bind" "^1.1.1"
+    graceful-fs "^4.2.4"
+    tapable "^2.2.0"
 
-"is-core-module@^2.8.1":
-  "integrity" "sha512-SdNCUs284hr40hFTFP6l0IfZ/RSrMXF3qgoRHd3/79unUTvrFO/JoXwkGm+5J/Oe3E/b5GsnG330uUNgRpu1PA=="
-  "resolved" "https://registry.npmjs.org/is-core-module/-/is-core-module-2.8.1.tgz"
-  "version" "2.8.1"
+function-bind@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.npmjs.org/function-bind/-/function-bind-1.1.1.tgz"
+  integrity sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==
+
+graceful-fs@^4.2.4:
+  version "4.2.10"
+  resolved "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.2.10.tgz"
+  integrity sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==
+
+has@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.npmjs.org/has/-/has-1.0.3.tgz"
+  integrity sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==
   dependencies:
-    "has" "^1.0.3"
+    function-bind "^1.1.1"
 
-"love-typescript-definitions@^0.24.1":
-  "integrity" "sha512-ahUm4LZ0HIHLTRRA+XOOkAxK3o+EBAAnTF9Xoq282Tg4UnZHkkb/TaMszY5OtNTVSrE3i9QmP0fxjyAj0h1hlQ=="
-  "resolved" "https://registry.npmjs.org/love-typescript-definitions/-/love-typescript-definitions-0.24.1.tgz"
-  "version" "0.24.1"
-
-"lua-types@^2.11.0":
-  "integrity" "sha512-J/8qHrOjkZuPBDhnuAg0DWoaJEImqXNzgEnUigCTVrSVCcchM5Y5zpcI3aWAZPhuZlb0QKC/f3nc7VGmZmBg7w=="
-  "resolved" "https://registry.npmjs.org/lua-types/-/lua-types-2.11.0.tgz"
-  "version" "2.11.0"
-
-"path-parse@^1.0.7":
-  "integrity" "sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw=="
-  "resolved" "https://registry.npmjs.org/path-parse/-/path-parse-1.0.7.tgz"
-  "version" "1.0.7"
-
-"resolve@^1.15.1":
-  "integrity" "sha512-Hhtrw0nLeSrFQ7phPp4OOcVjLPIeMnRlr5mcnVuMe7M/7eBn98A3hmFRLoFo3DLZkivSYwhRUJTyPyWAk56WLw=="
-  "resolved" "https://registry.npmjs.org/resolve/-/resolve-1.22.0.tgz"
-  "version" "1.22.0"
+is-core-module@^2.8.1:
+  version "2.8.1"
+  resolved "https://registry.npmjs.org/is-core-module/-/is-core-module-2.8.1.tgz"
+  integrity sha512-SdNCUs284hr40hFTFP6l0IfZ/RSrMXF3qgoRHd3/79unUTvrFO/JoXwkGm+5J/Oe3E/b5GsnG330uUNgRpu1PA==
   dependencies:
-    "is-core-module" "^2.8.1"
-    "path-parse" "^1.0.7"
-    "supports-preserve-symlinks-flag" "^1.0.0"
+    has "^1.0.3"
 
-"source-map@^0.7.3":
-  "integrity" "sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ=="
-  "resolved" "https://registry.npmjs.org/source-map/-/source-map-0.7.3.tgz"
-  "version" "0.7.3"
+love-typescript-definitions@^0.24.1:
+  version "0.24.1"
+  resolved "https://registry.npmjs.org/love-typescript-definitions/-/love-typescript-definitions-0.24.1.tgz"
+  integrity sha512-ahUm4LZ0HIHLTRRA+XOOkAxK3o+EBAAnTF9Xoq282Tg4UnZHkkb/TaMszY5OtNTVSrE3i9QmP0fxjyAj0h1hlQ==
 
-"supports-preserve-symlinks-flag@^1.0.0":
-  "integrity" "sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w=="
-  "resolved" "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz"
-  "version" "1.0.0"
+lua-types@^2.11.0:
+  version "2.11.0"
+  resolved "https://registry.npmjs.org/lua-types/-/lua-types-2.11.0.tgz"
+  integrity sha512-J/8qHrOjkZuPBDhnuAg0DWoaJEImqXNzgEnUigCTVrSVCcchM5Y5zpcI3aWAZPhuZlb0QKC/f3nc7VGmZmBg7w==
 
-"tapable@^2.2.0":
-  "integrity" "sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ=="
-  "resolved" "https://registry.npmjs.org/tapable/-/tapable-2.2.1.tgz"
-  "version" "2.2.1"
+path-parse@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.npmjs.org/path-parse/-/path-parse-1.0.7.tgz"
+  integrity sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==
 
-"typescript-to-lua@^1.0.0", "typescript-to-lua@^1.4.3":
-  "integrity" "sha512-oGJO1BqXKSxdfwavfOzthelxaQVAc7ykJ4Z/BF96nAWz35nmuLyv9FOSS132TgzLmV02859ndMuTYZtiVnN6jQ=="
-  "resolved" "https://registry.npmjs.org/typescript-to-lua/-/typescript-to-lua-1.4.3.tgz"
-  "version" "1.4.3"
+resolve@^1.15.1:
+  version "1.22.0"
+  resolved "https://registry.npmjs.org/resolve/-/resolve-1.22.0.tgz"
+  integrity sha512-Hhtrw0nLeSrFQ7phPp4OOcVjLPIeMnRlr5mcnVuMe7M/7eBn98A3hmFRLoFo3DLZkivSYwhRUJTyPyWAk56WLw==
   dependencies:
-    "enhanced-resolve" "^5.8.2"
-    "resolve" "^1.15.1"
-    "source-map" "^0.7.3"
+    is-core-module "^2.8.1"
+    path-parse "^1.0.7"
+    supports-preserve-symlinks-flag "^1.0.0"
 
-"typescript@~4.6.2":
-  "integrity" "sha512-yNIatDa5iaofVozS/uQJEl3JRWLKKGJKh6Yaiv0GLGSuhpFJe7P3SbHZ8/yjAHRQwKRoA6YZqlfjXWmVzoVSMw=="
-  "resolved" "https://registry.npmjs.org/typescript/-/typescript-4.6.3.tgz"
-  "version" "4.6.3"
+source-map@^0.7.3:
+  version "0.7.3"
+  resolved "https://registry.npmjs.org/source-map/-/source-map-0.7.3.tgz"
+  integrity sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==
+
+supports-preserve-symlinks-flag@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz"
+  integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
+
+tapable@^2.2.0:
+  version "2.2.1"
+  resolved "https://registry.npmjs.org/tapable/-/tapable-2.2.1.tgz"
+  integrity sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==
+
+tiled-lua-types@Nyaacinth/tiled-lua-types:
+  version "1.3.2"
+  resolved "https://codeload.github.com/Nyaacinth/tiled-lua-types/tar.gz/f85e1acf23a0245b6b78cf1143a3b409252af3aa"
+
+typescript-to-lua@^1.0.1, typescript-to-lua@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.npmjs.org/typescript-to-lua/-/typescript-to-lua-1.4.3.tgz"
+  integrity sha512-oGJO1BqXKSxdfwavfOzthelxaQVAc7ykJ4Z/BF96nAWz35nmuLyv9FOSS132TgzLmV02859ndMuTYZtiVnN6jQ==
+  dependencies:
+    enhanced-resolve "^5.8.2"
+    resolve "^1.15.1"
+    source-map "^0.7.3"
