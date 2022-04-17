@@ -12,17 +12,18 @@ import {Vector2, Color} from "./types"
 
 love.load = () => {
     let player = new Player();
-    player.transform.position = new Vector2(300,0)
-    let platform = new Tile()
+    player.transform.position = new Vector2(300,0);
+    let platform = new Tile();
     platform.transform.position = new Vector2(500,600);
 
     let debugSprite = new DebugSprite();
+    debugSprite.transform.position = new Vector2(100,100);
 
     entities.forEach(entity =>{
         entity.load();
     });
 
-    TiledDebug()
+    TiledDebug();
 };
 
 love.update = (dt) => {
@@ -31,4 +32,6 @@ love.update = (dt) => {
 
 love.draw = () => {
     ENGINE_DRAW();
+    
+    //DEBUGDrawColliders();
 }

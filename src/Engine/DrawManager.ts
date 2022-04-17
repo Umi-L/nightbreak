@@ -46,6 +46,4 @@ export function ENGINE_DRAW() {
         }
         
     }   
-
-    DEBUGDrawColliders();
 }

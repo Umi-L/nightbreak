@@ -61,7 +61,7 @@ export class Input{
                 value += 1
             }
 
-            if (value == 0 && joyMode != "none"){
+            if (value == 0 && joyMode != "none" && joysticks.length > 0){
                 value = joysticks[0].getGamepadAxis(<GamepadAxis>`${joyMode}x`);
             }
         }
@@ -73,7 +73,7 @@ export class Input{
                 value += 1
             }
 
-            if (value == 0 && joyMode != "none"){
+            if (value == 0 && joyMode != "none" && joysticks.length > 0){
                 value = joysticks[0].getGamepadAxis(<GamepadAxis>`${joyMode}y`);
             }
         }
