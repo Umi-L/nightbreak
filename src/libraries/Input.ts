@@ -4,7 +4,6 @@ let held:string[] = []
 let joysticks:Joystick[] = love.joystick.getJoysticks()
 
 interface IKeyCallback{
-    key:string;
     callback:Function;
     type: string;
 }
@@ -19,9 +18,7 @@ love.keypressed = (key) => {
 
     onPressed.forEach((keyCallback) =>{
         if (keyCallback.type == "keyboard" || keyCallback.type == "both"){
-            if (key === keyCallback.key){
-                keyCallback.callback();
-            }
+            keyCallback.callback(key);
         }
     })
 
@@ -33,9 +30,8 @@ love.keyreleased = (key) => {
 
     onReleased.forEach((keyCallback) =>{
         if (keyCallback.type == "keyboard" || keyCallback.type == "both"){
-            if (key === keyCallback.key){
-                keyCallback.callback();
-            }
+            keyCallback.callback(key);
+
         }
     })
 
@@ -46,13 +42,14 @@ love.keyreleased = (key) => {
     }
 }
 
-love.gamepadpressed = (joystick, button) => {
+love.gamepadpressed = (joystick, _button) => {
+
+    let button = _button + "_console"
 
     onPressed.forEach((keyCallback) =>{
         if (keyCallback.type == "controller" || keyCallback.type == "both"){
-            if (button === keyCallback.key){
-                keyCallback.callback();
-            }
+            keyCallback.callback(button);
+
         }
     })
 
@@ -61,14 +58,15 @@ love.gamepadpressed = (joystick, button) => {
     }
 }
 
-love.gamepadreleased = (joystick, button) => {
+love.gamepadreleased = (joystick, _button) => {
+    let button = _button + "_console"
+
     let index: number | undefined = Input.findInList(button);
 
     onReleased.forEach((keyCallback) =>{
         if (keyCallback.type == "controller" || keyCallback.type == "both"){
-            if (button === keyCallback.key){
-                keyCallback.callback();
-            }
+            keyCallback.callback(button);
+
         }
     })
 
@@ -95,9 +93,8 @@ export class Input{
         }
     }
 
-    static OnPressed(key:string, callback:Function, type:string = "both"): void {
+    static OnPressed(callback:Function, type:string = "both"): void {
         const keyCallback:IKeyCallback = {
-            key: key,
             callback: callback,
             type: type,
         }
@@ -109,10 +106,10 @@ export class Input{
         let value = 0
 
         if (axis == "Horizontal"){
-            if (this.KeyDown("a") || this.KeyDown("dpleft")){
+            if (this.KeyDown("a") || this.KeyDown("dpleft_console")){
                 value -= 1
             }
-            if (this.KeyDown("d") || this.KeyDown("dpright")){
+            if (this.KeyDown("d") || this.KeyDown("dpright_console")){
                 value += 1
             }
 
@@ -121,10 +118,10 @@ export class Input{
             }
         }
         else if (axis == "Vertical"){
-            if (this.KeyDown("w") || this.KeyDown("dpup")){
+            if (this.KeyDown("w") || this.KeyDown("dpup_console")){
                 value -= 1
             }
-            if (this.KeyDown("s") || this.KeyDown("dpdown")){
+            if (this.KeyDown("s") || this.KeyDown("dpdown_console")){
                 value += 1
             }
 

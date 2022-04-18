@@ -34,14 +34,16 @@ export class Player extends Entity {
         this.rb = this.GetComponent(RigidBody);
 
 
-        Input.OnPressed("space", ()=>{
-            let hit = rayCast(Vector2.subtract(this.transform.position, new Vector2(this.spriteWidth/2, (-this.spriteHeight/2) - 5)), math.pi / 2, this.spriteWidth, true)
+        Input.OnPressed((key:string) =>{
+            if (key == "space" || key == "a_console"){
+                let hit = rayCast(Vector2.subtract(this.transform.position, new Vector2(this.spriteWidth/2, (-this.spriteHeight/2) - 5)), math.pi / 2, this.spriteWidth, true)
 
-            if (hit){
-                console.log("jumped")
-                this.rb.velocity = Vector2.add(this.rb.velocity, new Vector2(0, -this.jumpForce))
+                if (hit){
+                    console.log("jumped")
+                    this.rb.velocity = Vector2.add(this.rb.velocity, new Vector2(0, -this.jumpForce))
 
-                console.log(this.rb.velocity.y)
+                    console.log(this.rb.velocity.y)
+                }
             }
         })
     }
