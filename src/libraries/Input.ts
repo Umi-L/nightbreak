@@ -3,13 +3,41 @@ import { GamepadAxis, Joystick } from "love.joystick"
 let held:string[] = []
 let joysticks:Joystick[] = love.joystick.getJoysticks()
 
+interface IKeyCallback{
+    key:string;
+    callback:Function;
+    type: string;
+}
+
+
+let onPressed:IKeyCallback[] = [];
+let onReleased:IKeyCallback[] = [];
+
+
+
 love.keypressed = (key) => {
+
+    onPressed.forEach((keyCallback) =>{
+        if (keyCallback.type == "keyboard" || keyCallback.type == "both"){
+            if (key === keyCallback.key){
+                keyCallback.callback();
+            }
+        }
+    })
+
     if (typeof key === 'string')
         held.push(key)
 }
 love.keyreleased = (key) => {
     let index: number | undefined = Input.findInList(key);
 
+    onReleased.forEach((keyCallback) =>{
+        if (keyCallback.type == "keyboard" || keyCallback.type == "both"){
+            if (key === keyCallback.key){
+                keyCallback.callback();
+            }
+        }
+    })
 
     if (index != undefined){
         if (index > -1) {
@@ -19,6 +47,15 @@ love.keyreleased = (key) => {
 }
 
 love.gamepadpressed = (joystick, button) => {
+
+    onPressed.forEach((keyCallback) =>{
+        if (keyCallback.type == "controller" || keyCallback.type == "both"){
+            if (button === keyCallback.key){
+                keyCallback.callback();
+            }
+        }
+    })
+
     if (button){
         held.push(button);
     }
@@ -26,6 +63,14 @@ love.gamepadpressed = (joystick, button) => {
 
 love.gamepadreleased = (joystick, button) => {
     let index: number | undefined = Input.findInList(button);
+
+    onReleased.forEach((keyCallback) =>{
+        if (keyCallback.type == "controller" || keyCallback.type == "both"){
+            if (button === keyCallback.key){
+                keyCallback.callback();
+            }
+        }
+    })
 
     if (index != undefined){
         if (index > -1) {
@@ -48,6 +93,16 @@ export class Input{
                 return i;
             }
         }
+    }
+
+    static OnPressed(key:string, callback:Function, type:string = "both"): void {
+        const keyCallback:IKeyCallback = {
+            key: key,
+            callback: callback,
+            type: type,
+        }
+
+        onPressed.push(keyCallback);
     }
 
     static GetAxis(axis:string, joyMode:string="none"): number{
@@ -77,6 +132,7 @@ export class Input{
                 value = joysticks[0].getGamepadAxis(<GamepadAxis>`${joyMode}y`);
             }
         }
+        
 
         return value;
     }

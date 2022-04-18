@@ -1,8 +1,9 @@
 //An implementation of the Actor solid physics system, based on this article: https://maddythorson.medium.com/celeste-and-towerfall-physics-d24bd2ae0fc5
 
+import { DRAW } from "../Engine/DrawManager";
 import { Vector2 } from "../types";
 
-let boundingBoxes: AABB[] = [];
+let colliders: AABB[] = [];
 let actors: Actor[] = [];
 let solids: Solid[] = []
 
@@ -27,7 +28,7 @@ export class AABB{
 
 
         if (exists){
-            boundingBoxes.push(this);
+            colliders.push(this);
 
             console.log("A collider was added")
         }
@@ -51,14 +52,14 @@ export class AABB{
     }
 
     public PointIsColliding(point:Vector2){
-        if (point.x > this.p1.x && point.x < this.p2.x && point.y < this.p1.y && point.y > this.p2.x){
+        if (point.x > this.p1.x && point.x < this.p2.x && point.y < this.p1.y && point.y > this.p2.y){
             return true
         }
         return false
     }
 
     Destroy() {
-        delete boundingBoxes[boundingBoxes.indexOf(this)]
+        delete colliders[colliders.indexOf(this)]
     }
 }
 
@@ -74,9 +75,9 @@ export class Actor{
     collideAt(position:Vector2): boolean {
         let tempCollider: AABB = new AABB(position, this.collider.width, this.collider.height, false);
         
-        for (let i = 0; i < boundingBoxes.length; i++){
-            if (this.collider !== boundingBoxes[i] || boundingBoxes[i] === tempCollider){
-                if (AABB.IsColliding(tempCollider, boundingBoxes[i])){
+        for (let i = 0; i < colliders.length; i++){
+            if (this.collider !== colliders[i] || colliders[i] === tempCollider){
+                if (AABB.IsColliding(tempCollider, colliders[i])){
                     //cleaning up tempCollider
                     tempCollider.Destroy();
                     return true;
@@ -178,9 +179,103 @@ export function LineIntersects(a1:Vector2, a2:Vector2, b1:Vector2, b2:Vector2): 
     return intersection;
 }
 
+export function rayCast(pos:Vector2, angle:number, distance:number, draw:boolean = false):Vector2 | undefined{
+    let x = distance*Math.sin(angle);
+    let y = -(distance*Math.cos(angle));
+
+    let pos2 = Vector2.add(pos, new Vector2(x, y));
+
+    if (draw){
+        DRAW(2, ()=>{
+            love.graphics.line(pos.x, pos.y, pos2.x, pos2.y);
+        })
+    }
+
+
+    for (let i = 0; i < colliders.length; i++){
+
+        let hit:Vector2|undefined;
+
+        //top
+        hit = LineIntersects(pos, pos2, colliders[i].p1, new Vector2(colliders[i].p2.x, colliders[i].p1.y));
+        if (hit){
+            if (draw){
+                DRAW(2, ()=>{
+                    love.graphics.circle("line", hit!.x, hit!.y, 10);
+                })
+            }
+            return hit;
+        }
+
+        //bottom
+        hit = LineIntersects(pos, pos2, new Vector2(colliders[i].p1.x, colliders[i].p2.y), colliders[i].p2);
+        if (hit){
+
+            if (draw){
+                DRAW(2, ()=>{
+                    love.graphics.circle("line", hit!.x, hit!.y, 10);
+                })
+            }
+
+            return hit;
+        }
+
+        //left
+        hit = LineIntersects(pos, pos2, colliders[i].p1, new Vector2(colliders[i].p1.x, colliders[i].p2.y));
+        if (hit){
+
+            if (draw){
+                DRAW(2, ()=>{
+                    love.graphics.circle("line", hit!.x, hit!.y, 10);
+                })
+            }
+
+            return hit;
+        }
+
+        //right
+        hit = LineIntersects(pos, pos2, new Vector2(colliders[i].p2.x, colliders[i].p1.y), colliders[i].p2);
+        if (hit){
+
+            if (draw){
+                DRAW(2, ()=>{
+                    love.graphics.circle("line", hit!.x, hit!.y, 10);
+                })
+            }
+
+            return hit;
+        }
+
+        //checking if a point is in the rectangle
+        if (colliders[i].PointIsColliding(pos)){
+            console.log("point is in rect")
+            if (draw){
+                DRAW(2, ()=>{
+                    love.graphics.circle("line", pos!.x, pos!.y, 10);
+                })
+            }
+
+            return pos;
+        }
+        if (colliders[i].PointIsColliding(pos2)){
+            console.log("point is in rect")
+
+            if (draw){
+                DRAW(2, ()=>{
+                    love.graphics.circle("line", pos2!.x, pos2!.y, 10);
+                })
+            }
+
+            return pos2;
+        }
+    }
+
+    return;
+}
+
 export function DEBUGDrawColliders(): void {
-    for(let i = 0; i < boundingBoxes.length; i++){
-        let collider = boundingBoxes[i];
+    for(let i = 0; i < colliders.length; i++){
+        let collider = colliders[i];
         love.graphics.rectangle("line", collider.position.x - collider.width/2, collider.position.y - collider.height/2, collider.width, collider.height);
 
         love.graphics.circle("line", collider.p1.x,collider.p1.y, 10)

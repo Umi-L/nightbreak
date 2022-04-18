@@ -16,7 +16,7 @@ love.load = () => {
     let player = new Player();
     player.transform.position = new Vector2(300,0);
     let platform = new Tile();
-    platform.transform.position = new Vector2(500,600);
+    platform.transform.position = new Vector2(300,350);
 
     let debugSprite = new DebugSprite();
     debugSprite.transform.position = new Vector2(100,100);
@@ -33,8 +33,6 @@ love.update = (dt) => {
 love.draw = () => {
     ENGINE_DRAW();
     
-    // DEBUG_DRAW_COLLIDERS()
-
-    DEBUGDrawColliders();
+    //DEBUGDrawColliders();
     
 }
