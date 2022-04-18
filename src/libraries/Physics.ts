@@ -50,6 +50,13 @@ export class AABB{
         return true;
     }
 
+    public PointIsColliding(point:Vector2){
+        if (point.x > this.p1.x && point.x < this.p2.x && point.y < this.p1.y && point.y > this.p2.x){
+            return true
+        }
+        return false
+    }
+
     Destroy() {
         delete boundingBoxes[boundingBoxes.indexOf(this)]
     }
@@ -141,6 +148,34 @@ export class Solid{
     }
 
     
+}
+
+//https://stackoverflow.com/questions/3746274/line-intersection-with-aabb-rectangle
+export function LineIntersects(a1:Vector2, a2:Vector2, b1:Vector2, b2:Vector2): Vector2|undefined
+{
+    let b = Vector2.subtract(a2, a1);
+    let d = Vector2.subtract(b2, b1);
+    let bDotDPerp:number = b.x * d.y - b.y * d.x;
+
+    // if b dot d == 0, it means the lines are parallel so have infinite intersection points
+    if (bDotDPerp == 0)
+        return;
+
+    let c = Vector2.subtract(b1, a1);
+    let t = (c.x * d.y - c.y * d.x) / bDotDPerp;
+    if (t < 0 || t > 1)
+        return;
+
+    let u = (c.x * b.y - c.y * b.x) / bDotDPerp;
+    if (u < 0 || u > 1)
+        return;
+
+    b.x *= t
+    b.y *= t
+
+    let intersection:Vector2 = Vector2.add(a1, b);
+
+    return intersection;
 }
 
 export function DEBUGDrawColliders(): void {

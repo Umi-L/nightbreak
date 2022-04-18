@@ -6,7 +6,7 @@ import { Tile } from "./Entities/Entities/Tile";
 import { Entity, entities } from "./Entities/Entity";
 import { DEBUGDrawColliders } from "./libraries/Physics";
 import {Vector2, Color} from "./types"
-import { DEBUG_DRAW_COLLIDERS } from "./libraries/box2dPhysics"
+// import { DEBUG_DRAW_COLLIDERS } from "./libraries/box2dPhysics"
 
 
 
@@ -33,8 +33,8 @@ love.update = (dt) => {
 love.draw = () => {
     ENGINE_DRAW();
     
-    DEBUG_DRAW_COLLIDERS()
+    // DEBUG_DRAW_COLLIDERS()
 
-    //DEBUGDrawColliders();
+    DEBUGDrawColliders();
     
 }
