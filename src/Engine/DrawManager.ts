@@ -1,13 +1,14 @@
 import { Entity, entities } from "../Entities/Entity";
 import { Camera } from "../libraries/Camera";
 import { DEBUGDrawColliders } from "../libraries/Physics";
+import { Vector2 } from "../types";
 
 export interface drawCall {
     layer: number;
     callback: Function;
 }
 
-export let MAIN_CAMERA:Camera = new Camera(50,50,love.graphics.getWidth(),love.graphics.getHeight());
+export let MAIN_CAMERA:Camera = new Camera(new Vector2(0,0),love.graphics.getWidth(),love.graphics.getHeight());
 
 export let DRAW_STACK:drawCall[] = [];
 
@@ -53,4 +54,7 @@ export function ENGINE_DRAW() {
     }   
     
     MAIN_CAMERA.detach()
+
+    love.graphics.print("Current FPS: " + love.timer.getFPS(), 10, 10)
+
 }
