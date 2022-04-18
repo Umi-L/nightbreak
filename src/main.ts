@@ -6,12 +6,14 @@ import { Tile } from "./Entities/Entities/Tile";
 import { Entity, entities } from "./Entities/Entity";
 import { DEBUGDrawColliders } from "./libraries/Physics";
 import {Vector2, Color} from "./types"
+import { Debug } from "./Entities/Entities/Debug";
 // import { DEBUG_DRAW_COLLIDERS } from "./libraries/box2dPhysics"
 
 
 
 love.load = () => {
-    love.filesystem.setRequirePath(love.filesystem.getRequirePath() + ";node_modules/?/?.lua")
+
+    new Debug()
 
     let player = new Player();
     player.transform.position = new Vector2(300,0);
@@ -33,6 +35,7 @@ love.update = (dt) => {
 }
 
 love.draw = () => {
+
     ENGINE_DRAW();
     
     //DEBUGDrawColliders();
