@@ -2,7 +2,7 @@
 - Basic Physics system @done
 - Anim8 support * https://github.com/maxiy01/tstl-anim8
 - shaders
-- Camera system
+- Camera system @done
 - Tiled system / Map parser
 - audio system
 - particle system

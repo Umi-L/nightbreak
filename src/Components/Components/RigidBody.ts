@@ -9,7 +9,7 @@ export class RigidBody extends Component {
     velocity: Vector2;
     drag: Vector2;
 
-    constructor(boundingBox: AABB, gravity: Vector2 = new Vector2(0,50), velocity: Vector2 = new Vector2(0,0), drag: Vector2 = new Vector2(1,1)) {
+    constructor(boundingBox: AABB, gravity: Vector2 = new Vector2(0,50), velocity: Vector2 = new Vector2(0,0), drag: Vector2 = new Vector2(10,1)) {
         super();
         this.actor = new Actor(boundingBox);
 
@@ -41,14 +41,14 @@ export class RigidBody extends Component {
         }
 
         if (this.velocity.y < 0){
-            this.velocity.y += this.drag.x * dt;
+            this.velocity.y += this.drag.y * dt;
             
             if (this.velocity.y > 0){
                 this.velocity.y = 0;
             }
         }
         else if (this.velocity.y > 0){
-            this.velocity.y -= this.drag.x * dt;
+            this.velocity.y -= this.drag.y * dt;
             
             if (this.velocity.y < 0){
                 this.velocity.y = 0;

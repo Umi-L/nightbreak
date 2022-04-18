@@ -1,10 +1,13 @@
 import { Entity, entities } from "../Entities/Entity";
+import { Camera } from "../libraries/Camera";
 import { DEBUGDrawColliders } from "../libraries/Physics";
 
 export interface drawCall {
     layer: number;
     callback: Function;
 }
+
+export let MAIN_CAMERA:Camera = new Camera(50,50,love.graphics.getWidth(),love.graphics.getHeight());
 
 export let DRAW_STACK:drawCall[] = [];
 
@@ -29,6 +32,8 @@ export function ENGINE_DRAW() {
      * possible preformance gain and higher fps with better sorting algorythmn here, currently has O(n^2)
      */
 
+     MAIN_CAMERA.attach()
+
     for (let _ = 0; _ < DRAW_STACK.length; _++) {
         let smallestIndex:number = 0;
         let smallestValue:number = DRAW_STACK[0].layer;
@@ -46,4 +51,6 @@ export function ENGINE_DRAW() {
         }
         
     }   
+    
+    MAIN_CAMERA.detach()
 }

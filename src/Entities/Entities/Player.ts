@@ -10,13 +10,13 @@ import { AABB, rayCast} from "../../libraries/Physics";
 import { Vector2 } from "../../types";
 import { Entity } from "../Entity";
 import { Utils } from "../../libraries/Utils";
-import { DRAW } from "../../Engine/DrawManager";
+import { DRAW, MAIN_CAMERA } from "../../Engine/DrawManager";
 
 export class Player extends Entity {
 
     speed: number = 300;
     maxSpeed: number = 10;
-    jumpForce:number = 400;
+    jumpForce:number = 20;
 
     spriteWidth:number;
     spriteHeight: number;
@@ -27,7 +27,7 @@ export class Player extends Entity {
 
         let image: Drawable = love.graphics.newImage("assets/icon.jpg");
         this.AddComponent(new SpriteRender(image, 1));
-        this.AddComponent(new RigidBody(AABBFromSprite(this.transform, image),undefined, undefined, new Vector2(20,5)));
+        this.AddComponent(new RigidBody(AABBFromSprite(this.transform, image),undefined, undefined, new Vector2(100,5)));
 
         this.spriteWidth = (<Texture>image).getWidth();
         this.spriteHeight = (<Texture>image).getHeight();
@@ -40,9 +40,7 @@ export class Player extends Entity {
 
                 if (hit){
                     console.log("jumped")
-                    this.rb.velocity = Vector2.add(this.rb.velocity, new Vector2(0, -this.jumpForce))
-
-                    console.log(this.rb.velocity.y)
+                    this.rb.velocity = Vector2.subtract(this.rb.velocity, new Vector2(0, this.jumpForce))
                 }
             }
         })
@@ -56,16 +54,13 @@ export class Player extends Entity {
 
         let movement = new Vector2(Input.GetAxis("Horizontal", "left")*this.speed * dt, 0);
 
-        if (Input.KeyDown("space")){
-            
-        }
-
         this.rb.velocity = Vector2.add(this.rb.velocity, movement);
 
-        this.rb.velocity = new Vector2(Utils.clamp(this.rb.velocity.x, -this.maxSpeed, this.maxSpeed), Utils.clamp(this.rb.velocity.y, -this.maxSpeed, this.maxSpeed));
+        this.rb.velocity = new Vector2(Utils.clamp(this.rb.velocity.x, -this.maxSpeed, this.maxSpeed), this.rb.velocity.y);
         
         //apply velocity change to rigidb
-        super.update(dt)        
-
+        super.update(dt)      
+        
+        MAIN_CAMERA.setPosition(this.transform.position)
     }
 }
