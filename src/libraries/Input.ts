@@ -1,3 +1,19 @@
+
+/**
+ * 
+ * The input system merges the love2d input systems for keyboard and joystick inputs into one.
+ * 
+ * the getAxis method of gathering input works for dpad, wasd, and joystick.
+ * 
+ * Input.keyDown() allows for non event based input checking.
+ * 
+ * all keynames are strings, (eg. "a") and all console keys have the "_console" salt (eg. "a_console")
+ * 
+ * you can register a callback function using the Input.OnPressed() & Input.OnReleased. 
+ * These are meant to be put into the constructor of Entities.
+ * 
+ */
+
 import { GamepadAxis, Joystick } from "love.joystick"
 
 let held:string[] = []

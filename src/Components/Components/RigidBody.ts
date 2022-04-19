@@ -19,8 +19,6 @@ export class RigidBody extends Component {
     }
 
     update(dt:number): void {
-        super.update(dt);
-
         this.velocity.y += this.gravity.y * dt;
         this.velocity.x += this.gravity.x * dt;
 

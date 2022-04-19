@@ -18,8 +18,6 @@ export class SpriteRender extends Component {
     }
 
     draw(){
-        super.draw();
-
         let transform = this.entity!.GetComponent(Transform);
         
         let offsetX:number = 0;

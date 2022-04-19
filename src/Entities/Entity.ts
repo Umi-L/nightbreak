@@ -1,18 +1,22 @@
+/**
+ * 
+ * This is the default entity class, all new entities should extned from this and be put in the Entities/Entities directory as shown in ExampleEntity.ts
+ * 
+ * The entity stores an array of components that contain code that is ran by event callbacks.
+ * 
+ */
+
 import { Component } from "../Components/Component"
 import { Transform } from "../Components/Components/Transform";
 
-type ComponentClass<T extends Component> = new (...args: any[]) => T
+let entities: Entity[] = [];
 
-let entities:Entity[] = [];
+abstract class Entity {
 
-abstract class Entity{
-    components:Component[] = [];
-    transform:Transform;
-    id:number;
+    components: Component[] = [];
+    transform: Transform;
 
-    constructor(){
-        this.id = entities.length;
-        
+    constructor() {
         entities.push(this);
 
         this.AddComponent(new Transform());
@@ -20,7 +24,7 @@ abstract class Entity{
         this.transform = this.GetComponent(Transform);
     }
 
-    public AddComponent(component:Component){
+    public AddComponent(component: Component) {
         this.components.push(component);
 
         component.entity = this;
@@ -32,7 +36,7 @@ abstract class Entity{
                 return component as C
             }
         }
-        throw new Error(`Component ${constr.name} not found on Entity ${this.constructor.name}`)
+        error(`Component ${constr.name} not found on Entity ${this.constructor.name}`)
     }
 
     public RemoveComponent<C extends Component>(constr: { new(...args: any[]): C }): void {
@@ -43,24 +47,22 @@ abstract class Entity{
         }
     }
 
-    load(){
-        console.log("loaded Entity")
-
-        this.components.forEach((component)=>{
+    load() {
+        this.components.forEach((component) => {
             if (component.load) {
                 component.load();
             }
         });
     }
-    update(dt:number){
-        this.components.forEach((component)=>{
+    update(dt: number) {
+        this.components.forEach((component) => {
             if (component.update) {
                 component.update(dt);
             }
         });
     }
-    draw(){
-        this.components.forEach((component)=>{
+    draw() {
+        this.components.forEach((component) => {
             if (component.draw) {
                 component.draw();
             }
@@ -68,4 +70,4 @@ abstract class Entity{
     }
 }
 
-export {entities, Entity}
+export { entities, Entity }

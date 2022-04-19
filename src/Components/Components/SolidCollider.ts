@@ -12,8 +12,6 @@ export class SolidCollider extends Component {
     }
 
     update(dt:number): void {
-        super.update(dt);
-
         this.solid.collider.updatePosition();
     }
 }
