@@ -7,5 +7,5 @@
 - audio system
 - particle system
 - Update physics to box2d
-- Pull features from https://github.com/Nyaacinth/NyaaLime/tree/main/src
-- raycasting: https://gdbooks.gitbooks.io/3dcollisions/content/Chapter3/raycast_aabb.html
+- Pull features from https://github.com/Nyaacinth/NyaaLime/tree/main/src @done
+- raycasting: https://gdbooks.gitbooks.io/3dcollisions/content/Chapter3/raycast_aabb.html @done
