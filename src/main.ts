@@ -7,9 +7,14 @@ import { entities } from "./Entities/Entity";
 import { Vector2 } from "./types"
 import { Debug } from "./Entities/Entities/Debug";
 import { ENGINE_LOAD } from './Engine/LoadManager';
+import {TiledParser } from './libraries/TiledParser';
+import * as map from "./assets/testmap.json";
+
+let parser = new TiledParser(map, love.graphics.newImage("assets/sheet.png"));
 
 
 love.load = () => {
+
 
     new Debug()
 
@@ -38,6 +43,7 @@ love.update = (dt) => {
 }
 
 love.draw = () => {
+    // parser.drawMap();
 
     ENGINE_DRAW();
 

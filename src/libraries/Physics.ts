@@ -241,7 +241,7 @@ export function LineIntersects(a1:Vector2, a2:Vector2, b1:Vector2, b2:Vector2): 
     return intersection;
 }
 
-export function rayCast(pos:Vector2, angle:number, distance:number, draw:boolean = false):Vector2 | undefined{
+export function rayCast(pos:Vector2, angle:number, distance:number, blackList:AABB[] = [], draw:boolean = false):Vector2 | undefined{
     let x = distance*Math.sin(angle);
     let y = -(distance*Math.cos(angle));
 
@@ -255,80 +255,81 @@ export function rayCast(pos:Vector2, angle:number, distance:number, draw:boolean
 
 
     for (let i = 0; i < colliders.length; i++){
+        if (!blackList.includes(colliders[i])){
+            let hit:Vector2|undefined;
 
-        let hit:Vector2|undefined;
-
-        //top
-        hit = LineIntersects(pos, pos2, colliders[i].p1, new Vector2(colliders[i].p2.x, colliders[i].p1.y));
-        if (hit){
-            if (draw){
-                DRAW(2, ()=>{
-                    love.graphics.circle("line", hit!.x, hit!.y, 10);
-                })
-            }
-            return hit;
-        }
-
-        //bottom
-        hit = LineIntersects(pos, pos2, new Vector2(colliders[i].p1.x, colliders[i].p2.y), colliders[i].p2);
-        if (hit){
-
-            if (draw){
-                DRAW(2, ()=>{
-                    love.graphics.circle("line", hit!.x, hit!.y, 10);
-                })
+            //top
+            hit = LineIntersects(pos, pos2, colliders[i].p1, new Vector2(colliders[i].p2.x, colliders[i].p1.y));
+            if (hit){
+                if (draw){
+                    DRAW(2, ()=>{
+                        love.graphics.circle("line", hit!.x, hit!.y, 10);
+                    })
+                }
+                return hit;
             }
 
-            return hit;
-        }
+            //bottom
+            hit = LineIntersects(pos, pos2, new Vector2(colliders[i].p1.x, colliders[i].p2.y), colliders[i].p2);
+            if (hit){
 
-        //left
-        hit = LineIntersects(pos, pos2, colliders[i].p1, new Vector2(colliders[i].p1.x, colliders[i].p2.y));
-        if (hit){
+                if (draw){
+                    DRAW(2, ()=>{
+                        love.graphics.circle("line", hit!.x, hit!.y, 10);
+                    })
+                }
 
-            if (draw){
-                DRAW(2, ()=>{
-                    love.graphics.circle("line", hit!.x, hit!.y, 10);
-                })
+                return hit;
             }
 
-            return hit;
-        }
+            //left
+            hit = LineIntersects(pos, pos2, colliders[i].p1, new Vector2(colliders[i].p1.x, colliders[i].p2.y));
+            if (hit){
 
-        //right
-        hit = LineIntersects(pos, pos2, new Vector2(colliders[i].p2.x, colliders[i].p1.y), colliders[i].p2);
-        if (hit){
+                if (draw){
+                    DRAW(2, ()=>{
+                        love.graphics.circle("line", hit!.x, hit!.y, 10);
+                    })
+                }
 
-            if (draw){
-                DRAW(2, ()=>{
-                    love.graphics.circle("line", hit!.x, hit!.y, 10);
-                })
+                return hit;
             }
 
-            return hit;
-        }
+            //right
+            hit = LineIntersects(pos, pos2, new Vector2(colliders[i].p2.x, colliders[i].p1.y), colliders[i].p2);
+            if (hit){
 
-        //checking if a point is in the rectangle
-        if (colliders[i].PointIsColliding(pos)){
-            console.log("point is in rect")
-            if (draw){
-                DRAW(2, ()=>{
-                    love.graphics.circle("line", pos!.x, pos!.y, 10);
-                })
+                if (draw){
+                    DRAW(2, ()=>{
+                        love.graphics.circle("line", hit!.x, hit!.y, 10);
+                    })
+                }
+
+                return hit;
             }
 
-            return pos;
-        }
-        if (colliders[i].PointIsColliding(pos2)){
-            console.log("point is in rect")
+            //checking if a point is in the rectangle
+            if (colliders[i].PointIsColliding(pos)){
+                console.log("point is in rect")
+                if (draw){
+                    DRAW(2, ()=>{
+                        love.graphics.circle("line", pos!.x, pos!.y, 10);
+                    })
+                }
 
-            if (draw){
-                DRAW(2, ()=>{
-                    love.graphics.circle("line", pos2!.x, pos2!.y, 10);
-                })
+                return pos;
             }
+            if (colliders[i].PointIsColliding(pos2)){
+                console.log("point is in rect")
 
-            return pos2;
+                if (draw){
+                    DRAW(2, ()=>{
+                        love.graphics.circle("line", pos2!.x, pos2!.y, 10);
+                    })
+                }
+
+                return pos2;
+            }
         }
     }
 

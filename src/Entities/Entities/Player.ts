@@ -40,7 +40,7 @@ export class Player extends Entity {
             }
 
             if (key == "space" || key == "a_console") {
-                let hit = rayCast(Vector2.subtract(this.transform.position, new Vector2(this.spriteWidth / 2, (-this.spriteHeight / 2) - 5)), math.pi / 2, this.spriteWidth, true)
+                let hit = rayCast(Vector2.subtract(this.transform.position, new Vector2(this.spriteWidth / 2, (-this.spriteHeight / 2) - 5)), math.pi / 2, this.spriteWidth, undefined, true)
 
                 if (hit) {
                     this.rb.velocity = Vector2.subtract(this.rb.velocity, new Vector2(0, this.jumpForce))

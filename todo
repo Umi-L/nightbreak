@@ -4,7 +4,7 @@
 - shaders
 - Camera system @done
 - Tiled system / Map parser
-- audio system
+- audio system (maybe just use the builtin love2d audio sys?) @done
 - particle system
 - Update physics to box2d
 - Pull features from https://github.com/Nyaacinth/NyaaLime/tree/main/src @done
