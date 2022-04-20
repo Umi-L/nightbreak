@@ -58,14 +58,16 @@ export class RigidBody extends Component {
         this.actor.collider.position = transform.position;
 
 
-
-        //apply forces to the Actor
+        //apply forces to the Actor & set velo to 0 on collide
         this.actor.moveX(this.velocity.x, ()=>{
             this.velocity.x = 0;
         });
         this.actor.moveY(this.velocity.y, ()=>{
             this.velocity.y = 0;
         });
+
+
+        
         this.actor.collider.updatePosition();
 
 

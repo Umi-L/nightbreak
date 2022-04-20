@@ -19,9 +19,16 @@ love.load = () => {
     platform.transform.position = new Vector2(300, 350);
     let platform2 = new Tile();
     platform2.transform.position = new Vector2(556, 500);
+    let platform3 = new Tile();
+    platform3.transform.position = new Vector2(812, 500);
 
-    let debugSprite = new DebugSprite();
+    platform3.collider.solid.collider.blacklistEnabled = true;
+    platform3.collider.solid.collider.blacklistAdd(player.rb.actor.collider);
+
+    let debugSprite = new DebugSprite(0);
     debugSprite.transform.position = new Vector2(100, 100);
+    let debugSprite2 = new DebugSprite(2);
+    debugSprite2.transform.position = new Vector2(500, 100);
 
     ENGINE_LOAD();
 };

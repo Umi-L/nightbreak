@@ -13,10 +13,10 @@ import { Utils } from "../../libraries/Utils";
 
 export class DebugSprite extends Entity {
 
-    constructor(){
+    constructor(layer:number){
         super();
 
         let image: Drawable = love.graphics.newImage("assets/DebugSprite.jpg");
-        this.AddComponent(new SpriteRender(image, 0));
+        this.AddComponent(new SpriteRender(image, layer));
     }
 }

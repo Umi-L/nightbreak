@@ -17,7 +17,19 @@ export class AABB{
     width: number;
     height: number;
 
-    constructor(position: Vector2, width: number, height: number, exists: boolean = true){
+    canCollide: boolean;
+
+    blacklistEnabled: boolean;
+    collisionBlacklist:AABB[] = [];
+
+    whitelistEnabled: boolean;
+    collisionWhitelist:AABB[] = [];
+
+    constructor(position: Vector2, width: number, height: number, exists: boolean = true, canCollide: boolean = true, blacklistEnabled: boolean = false, whitelistEnabled: boolean = false){
+        this.canCollide = canCollide;
+        this.whitelistEnabled = whitelistEnabled;
+        this.blacklistEnabled = blacklistEnabled;
+
         this.position = position;
 
         this.width = width;
@@ -29,9 +41,23 @@ export class AABB{
 
         if (exists){
             colliders.push(this);
-
-            console.log("A collider was added")
         }
+    }
+
+    whitelistAdd(box:AABB){
+        this.collisionWhitelist.push(box);
+    }
+
+    whitelistRemove(box:AABB){
+        this.collisionWhitelist.splice(this.collisionWhitelist.indexOf(box), 1);
+    }
+
+    blacklistAdd(box:AABB){
+        this.collisionBlacklist.push(box);
+    }
+
+    blacklistRemove(box:AABB){
+        this.collisionBlacklist.splice(this.collisionBlacklist.indexOf(box), 1);
     }
 
     updatePosition(){
@@ -39,7 +65,43 @@ export class AABB{
         this.p2 = new Vector2((this.width/2) + this.position.x, (this.height/2) + this.position.y);
     }
 
+    blacklistContains(box:AABB): boolean{
+        if (!this.blacklistEnabled){return true}
+
+        return this.collisionBlacklist.includes(box);
+    }
+
+    whitelistContains(box:AABB): boolean{
+        if (!this.whitelistEnabled){return true}
+
+        return this.collisionWhitelist.includes(box);
+    }
+
+    canCollideWith(other:AABB): boolean {
+        if (this.canCollide && other.canCollide){
+            if (!other.whitelistEnabled && !this.whitelistEnabled && 
+                !this.blacklistEnabled && !other.blacklistEnabled){
+
+                return true;
+            }
+            if (this.whitelistEnabled || other.whitelistEnabled){
+                if (this.whitelistContains(other) && other.whitelistContains(this))
+                    return true
+            }
+            if (this.blacklistEnabled || other.blacklistEnabled){
+                if (!this.blacklistContains(other) && !other.blacklistContains(this))
+                    return true
+            }
+        }
+
+        return false
+    }
+
     static IsColliding(box1: AABB, box2: AABB): boolean{
+
+        if (!box1.canCollideWith(box2))
+            return false;
+
         if (box1.p1.y > box2.p2.y 
         || box1.p2.y < box2.p1.y) {
             return false;
