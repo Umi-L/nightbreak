@@ -1,4 +1,4 @@
-import { Drawable, Texture } from "love.graphics";
+import { Drawable, Quad, Texture } from "love.graphics";
 import { SpriteRender } from "../../Components/Components/SpriteRenderer";
 import { Entity } from "../Entity";
 import { Solid, AABB } from "../../libraries/Physics"
@@ -9,12 +9,11 @@ import { AABBFromSprite } from "../../libraries/ImageTools";
 export class Tile extends Entity {
     collider: SolidCollider;
 
-    constructor(){
+    constructor(image:Drawable, layer:number, quad:Quad, tileWidth:number, tileHeight:number){
         super();
 
-        let image: Drawable = love.graphics.newImage("assets/icon.jpg");
-        this.AddComponent(new SpriteRender(image));
-        this.AddComponent(new SolidCollider(AABBFromSprite(this.transform, image)));
+        this.AddComponent(new SpriteRender(image, layer, quad, "center", tileWidth, tileHeight));
+        this.AddComponent(new SolidCollider(new AABB(this.transform.position, tileWidth, tileHeight)));
 
 
         this.collider = this.GetComponent(SolidCollider);

@@ -339,10 +339,8 @@ export function rayCast(pos:Vector2, angle:number, distance:number, blackList:AA
 export function DEBUGDrawColliders(): void {
     for(let i = 0; i < colliders.length; i++){
         let collider = colliders[i];
-        love.graphics.rectangle("line", collider.position.x - collider.width/2, collider.position.y - collider.height/2, collider.width, collider.height);
-
-        love.graphics.circle("line", collider.p1.x,collider.p1.y, 10)
-
-        love.graphics.circle("line", collider.p2.x,collider.p2.y, 10)
+        DRAW(999, ()=>{
+            love.graphics.rectangle("line", collider.position.x - collider.width/2, collider.position.y - collider.height/2, collider.width, collider.height);
+        });
     }
 }

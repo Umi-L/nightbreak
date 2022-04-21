@@ -9,6 +9,8 @@ import { Debug } from "./Entities/Entities/Debug";
 import { ENGINE_LOAD } from './Engine/LoadManager';
 import {TiledParser } from './libraries/TiledParser';
 import * as map from "./assets/testmap.json";
+import { RootObject } from "./libraries/tiledMap";
+import { DEBUGDrawColliders } from "./libraries/Physics";
 
 let parser = new TiledParser(map, love.graphics.newImage("assets/sheet.png"));
 
@@ -19,21 +21,14 @@ love.load = () => {
     new Debug()
 
     let player = new Player();
-    player.transform.position = new Vector2(300, 0);
-    let platform = new Tile();
-    platform.transform.position = new Vector2(300, 350);
-    let platform2 = new Tile();
-    platform2.transform.position = new Vector2(556, 500);
-    let platform3 = new Tile();
-    platform3.transform.position = new Vector2(812, 500);
-
-    platform3.collider.solid.collider.blacklistEnabled = true;
-    platform3.collider.solid.collider.blacklistAdd(player.rb.actor.collider);
+    player.transform.position = new Vector2(300, -200);
 
     let debugSprite = new DebugSprite(0);
     debugSprite.transform.position = new Vector2(100, 100);
     let debugSprite2 = new DebugSprite(2);
     debugSprite2.transform.position = new Vector2(500, 100);
+
+    parser.initmap();
 
     ENGINE_LOAD();
 };
@@ -43,10 +38,8 @@ love.update = (dt) => {
 }
 
 love.draw = () => {
-    // parser.drawMap();
-
     ENGINE_DRAW();
 
-    //DEBUGDrawColliders();
+    DEBUGDrawColliders();
 
 }
