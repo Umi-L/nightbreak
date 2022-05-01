@@ -27,7 +27,7 @@ export class Player extends Entity {
 
         let image: Drawable = love.graphics.newImage("assets/icon.jpg");
         this.AddComponent(new SpriteRender(image, 1));
-        this.AddComponent(new RigidBody(AABBFromSprite(this.transform, image), undefined, undefined, new Vector2(100, 5)));
+        this.AddComponent(new RigidBody(AABBFromSprite(this.transform, image), new Vector2(0, 0), undefined, new Vector2(100, 100)));
 
         this.spriteWidth = (<Texture>image).getWidth();
         this.spriteHeight = (<Texture>image).getHeight();
@@ -55,11 +55,11 @@ export class Player extends Entity {
 
     update(dt: number): void {
 
-        let movement = new Vector2(Input.GetAxis("Horizontal", "left") * this.speed * dt, 0);
+        let movement = new Vector2(Input.GetAxis("Horizontal", "left") * this.speed * dt, Input.GetAxis("Vertical", "left") * this.speed * dt);
 
         this.rb.velocity = Vector2.add(this.rb.velocity, movement);
 
-        this.rb.velocity = new Vector2(Utils.clamp(this.rb.velocity.x, -this.maxSpeed, this.maxSpeed), this.rb.velocity.y);
+        this.rb.velocity = new Vector2(Utils.clamp(this.rb.velocity.x, -this.maxSpeed, this.maxSpeed), Utils.clamp(this.rb.velocity.y, -this.maxSpeed, this.maxSpeed));
 
         //apply velocity change to rigidb
         super.update(dt)

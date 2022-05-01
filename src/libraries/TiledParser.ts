@@ -1,4 +1,4 @@
-import { Quad, Texture } from "love.graphics";
+import { Canvas, Drawable, Quad, SpriteBatch, Texture } from "love.graphics";
 import { DRAW } from "../Engine/DrawManager";
 import { Tile } from "../Entities/Entities/Tile";
 
@@ -10,9 +10,13 @@ export class TiledParser{
     tileWidth:number;
     tileHeight:number;
 
+    canvas:Canvas;
+
     constructor(map:any, spriteSheet:Texture){
 
         this.spriteSheet = spriteSheet;
+        this.canvas = love.graphics.newCanvas();
+
 
         this.map = map;
 
@@ -41,7 +45,8 @@ export class TiledParser{
     initmap(){
 
         let layers = this.map.layers;
-
+        love.graphics.setCanvas(this.canvas);
+        love.graphics.clear();
 
         for (let i = 1; i <= 2; i++){
             let layer = layers[i];
@@ -57,21 +62,19 @@ export class TiledParser{
                             let tilex = x*this.tileWidth;
                             let tiley = y*this.tileHeight;
 
-                            let tile = new Tile(this.spriteSheet, 1, this.tiles[spriteIndex], this.tileWidth, this.tileHeight)
-                            tile.transform.position.x = tilex;
-                            tile.transform.position.y = tiley;
-
-                            // DRAW(5, ()=>{
-                            //     love.graphics.push()
-                            //     love.graphics.scale(2,2)
-                            //     love.graphics.draw(this.spriteSheet, this.tiles[spriteIndex], math.floor(tilex), math.floor(tiley))
-                            //     love.graphics.pop()
-                            // })
+                            love.graphics.draw(this.spriteSheet, this.tiles[spriteIndex], tilex, tiley);
                         }
                     }
                 }
             }
         }
+        love.graphics.setCanvas();
+    }
 
+    
+    draw(layer:number, x:number, y:number){
+        DRAW(layer, ()=>{
+            love.graphics.draw(this.canvas, x, y);
+        });
     }
 }

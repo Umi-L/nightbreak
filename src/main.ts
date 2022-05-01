@@ -14,10 +14,7 @@ import { DEBUGDrawColliders } from "./libraries/Physics";
 
 let parser = new TiledParser(map, love.graphics.newImage("assets/sheet.png"));
 
-
 love.load = () => {
-
-
     new Debug()
 
     let player = new Player();
@@ -38,8 +35,9 @@ love.update = (dt) => {
 }
 
 love.draw = () => {
+    parser.draw(5, 0, 0);
+
     ENGINE_DRAW();
 
     DEBUGDrawColliders();
-
 }
